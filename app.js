@@ -12,6 +12,10 @@ app.set('views', './views');
 // 托管静态资源
 app.use('/node_modules', express.static('node_modules'));
 
+// 注册 body-parser 中间件
+var bodyParser = require('body-parser');
+app.use(bodyParser.urlencoded({ extended: false }));
+
 // 导入首页路由
 /* var indexRouter = require('./router/indexRouter.js');
 app.use(indexRouter);

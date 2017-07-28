@@ -45,6 +45,29 @@
   </form>
 
   <script src="/node_modules/jquery/dist/jquery.min.js"></script>
+  <script>
+    $(function () {
+      $('#form').on('submit', function (e) {
+        e.preventDefault();
+
+        // 手动发起 Ajax 的注册请求
+        $.ajax({
+          url: '/register',
+          data: $(this).serialize(),
+          type: 'post',
+          dataType: 'json',
+          success: function (results) {
+            if (results.err_code === 0) {
+              // 如果注册OK。则直接跳转到登录页
+              location.href = '/login';
+            } else {
+              alert(results.msg);
+            }
+          }
+        });
+      });
+    });
+  </script>
 </body>
 
 </html>
