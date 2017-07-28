@@ -68,8 +68,30 @@ module.exports = {
       // 登录失败的情况
       if (err || results.length !== 1) return res.json({ err_code: 1, msg: '登录失败，请稍后再试！' });
 
+      // 在返回登录成功之前，先把登录的状态 和 登录用户的数据，保存到 Session 中
+      console.log(req.session);
+      // 当注册 Session 中间件 OK之后，只要你能访问到 req 这个对象，那么就能访问到 req.session
+      req.session.islogin = true; // 将登录成功的状态，保存到 req.session 中
+      req.session.user = results[0]; // 将登录人的 信息对象，保存到 req.session 中
+
+      console.log(req.session);
+
       // 登录Ok的情况
       res.json({ err_code: 0 });
+    });
+  },
+  logout(req, res) { // 注销登录
+    // 分析：登录状态的保持，是通过 Session 技术实现的； 是直接 调用 req.session.*** 来保存的
+    /* req.session.islogin = null;
+    req.session.user = null; */
+    req.session.destroy((err) => {
+      if(err) { // 注销失败
+        console.log('注销失败！');
+        res.redirect('/');
+        return;
+      }
+      console.log('注销成功！');
+      res.redirect('/');
     });
   }
 }

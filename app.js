@@ -16,6 +16,15 @@ app.use('/node_modules', express.static('node_modules'));
 var bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: false }));
 
+// 注册 Session 中间件
+var session = require('express-session');
+// 使用 app.use 把 Session 中间件注册到 当前的 Web 服务器中去使用
+app.use(session({
+  secret: '这是加密字符串，随便写！', // 用来生成加密的内容
+  resave: false,
+  saveUninitialized: false
+}));
+
 // 导入首页路由
 /* var indexRouter = require('./router/indexRouter.js');
 app.use(indexRouter);
