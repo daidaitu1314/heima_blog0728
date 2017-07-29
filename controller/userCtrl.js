@@ -69,12 +69,12 @@ module.exports = {
       if (err || results.length !== 1) return res.json({ err_code: 1, msg: '登录失败，请稍后再试！' });
 
       // 在返回登录成功之前，先把登录的状态 和 登录用户的数据，保存到 Session 中
-      console.log(req.session);
+      // console.log(req.session);
       // 当注册 Session 中间件 OK之后，只要你能访问到 req 这个对象，那么就能访问到 req.session
       req.session.islogin = true; // 将登录成功的状态，保存到 req.session 中
       req.session.user = results[0]; // 将登录人的 信息对象，保存到 req.session 中
 
-      console.log(req.session);
+      // console.log(req.session);
 
       // 登录Ok的情况
       res.json({ err_code: 0 });

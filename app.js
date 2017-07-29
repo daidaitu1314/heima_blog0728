@@ -50,6 +50,6 @@ fs.readdir(path.join(__dirname, './router'), (err, filenames) => {
   });
 });
 
-app.listen(3003, function () {
-  console.log('http://127.0.0.1:3003');
+app.listen(3004, function () {
+  console.log('http://127.0.0.1:3004');
 });
